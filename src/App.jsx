@@ -4,6 +4,7 @@ import ShowAlbums from './pages/ShowAlbums';
 import { Route, Routes } from 'react-router-dom';
 import About from './pages/About'
 
+
 function App() {
     const [searchResults, setSearchResults] = useState([]); // Sökresultat sparas i SearchResults med hjälp av useState
     const [theme, setTheme] = useState('night'); // Tema på sidan sparas i theme, förvalt är night.
@@ -69,7 +70,9 @@ function App() {
       <div className='App'>
       {/* Navbar ligger högst upp utanför Routes */}
       {/* Skickar props till Navbar  */}
-      <Navbar onSearch={handleSearch} theme={theme} setTheme={setTheme} /> 
+      <Navbar onSearch={handleSearch} theme={theme} setTheme={setTheme} />
+    
+      
 
       {/* Här kommer routes som pekar länkarna i Navbar till rätt page. */}
       <Routes>
@@ -77,8 +80,11 @@ function App() {
         <Route path='/about' element={<About />} />
         {/* Skickar props till ShowAlbums */}
         <Route path="/" element={<ShowAlbums searchResults={searchResults} theme={theme} />} />
+
         
       </Routes>
+
+
       
     </div>
      
