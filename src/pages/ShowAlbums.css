@@ -1,0 +1,28 @@
+.albums {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.albums img {
+    
+    width: 200px;
+}
+
+.album {
+    margin: 1rem;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchresults-h2.night {
+    color: #ffffff;
+}
+
+.searchresults-h2.day {
+    color: #000000;
+}
+
+.albumname-p.night {
+    color: #ffffff;
+}
