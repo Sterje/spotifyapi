@@ -1,0 +1,41 @@
+name: Deploy React App to Production
+
+on:
+  push:
+    branches:
+      - main # Workflow körs när kod pushas till main-branchen
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Körs på en Ubuntu-maskin
+
+    steps:
+      # 1. Checka ut koden från repository
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2. Installera Node.js (ange version)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Använd Node.js 18
+
+      # 3. Installera npm-beroenden
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Bygg applikationen och använd secrets
+      - name: Build the app
+        env:
+          VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          VITE_SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+        run: npm run build
+
+      # 5. Deploy (exempel med Netlify)
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0.0
+        with:
+          publish-dir: ./dist # Mappen där den byggda appen ligger
+          production-deploy: true
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
